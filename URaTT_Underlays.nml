@@ -1,0 +1,264 @@
+grf {
+	grfid: "RJE\19";
+	name: string(STR_GRF_NAME_UNDERLAY);
+	desc: string(STR_GRF_DESCRIPTION_UNDERLAY);
+	url:  string(STR_GRF_URL);
+	version: 100;
+	min_compatible_version: 100;
+}
+//==================================================================================================================================
+//								TEMPLATES
+//==================================================================================================================================
+template ground_tile(x, y) { [x, y, 64, 31, -31, 0] }
+template tmpl_underlay_overlay_straight(y) {
+    ground_tile(  1,  y)
+    ground_tile( 70,  y)
+}
+template tmpl_underlay_overlay_junctions(y) {
+    ground_tile(139,  y)
+    ground_tile(208,  y)
+    ground_tile(277,  y)
+    ground_tile(346,  y)
+    ground_tile(415,  y)
+}
+template tmpl_underlay_overlay_corners(y) {
+    ground_tile(484,  y)
+    ground_tile(553,  y)
+    ground_tile(622,  y)
+    ground_tile(691,  y)
+}
+template tmpl_underlay_overlay_slope(y) {
+    [    1,   y+36,   64,   39,   -31,   -8]
+    [   70,   y+36,   64,   23,   -31,    0]
+    [  139,   y+36,   64,   23,   -31,    0]
+    [  208,   y+36,   64,   39,   -31,   -8]
+}
+template tmpl_underlay_overlay_half_tiles(y) {
+    ground_tile(277, y+36)
+    ground_tile(346, y+36)
+    ground_tile(415, y+36)
+    ground_tile(484, y+36)
+}
+template tmpl_underlay_overlay(y) {
+    tmpl_underlay_overlay_straight(y)
+    tmpl_underlay_overlay_junctions(y)
+    tmpl_underlay_overlay_corners(y)
+    tmpl_underlay_overlay_slope(y)
+    tmpl_underlay_overlay_half_tiles(y)
+}
+
+template tmpl_bridge_straight(x) {
+    ground_tile(  1+x, 401)
+    ground_tile( 70+x, 401)
+}
+template tmpl_bridge_slope(x) {
+    [  139+x,  401,   64,   39,   -31,   -8]
+    [  208+x,  401,   64,   23,   -31,    0]
+    [  277+x,  401,   64,   23,   -31,    0]
+    [  346+x,  401,   64,   39,   -31,   -8]
+}
+template tmpl_bridge_surfaces(x) {
+    tmpl_bridge_straight(x)
+    tmpl_bridge_slope(x)
+}
+
+template tmpl_depot(x) {
+    [    1+x,  445,   64,   61,   -31,  -30]
+    [   70+x,  445,   64,   61,    -1,  -45]
+    [  139+x,  445,   64,   61,   -31,  -30]
+    [  208+x,  445,   64,   61,   -61,  -45]
+    [  277+x,  445,   64,   61,   -61,  -45]
+    [  346+x,  445,   64,   61,    -1,  -45]
+}
+
+template tmpl_roadstop(x) {
+    ground_tile(  1+x, 511)
+    ground_tile( 70+x, 511)
+    ground_tile(139+x, 511)
+    ground_tile(208+x, 511)
+}
+
+template tmpl_tunnels(x, y) {
+    ground_tile(  1+x, 583+y)
+    ground_tile( 70+x, 583+y)
+    ground_tile(139+x, 583+y)
+    ground_tile(208+x, 583+y)
+}
+
+template tmpl_sign_oneway(a,b) {
+	[      1,     55,     34,     22,    -26,     -9]
+	[     36,     55,     34,     22,     -6,    -19]
+	[   71+a,     55,     34,     22,    -16,    -14]	  //STOP
+	[    106,     55,     34,     22,    -26,    -19]
+	[    141,     55,     34,     22,     -6,    - 9]
+	[  176+b,     55,     34,     22,    -16,    -14]	  //STOP
+	[      1,     78,     34,     22,    -26,     -8]
+	[     36,     78,     34,     22,     -6,    -23]
+	[   71+a,     78,     34,     22,    -16,    -14]	  //STOP
+	[    106,     78,     34,     22,    -26,    -23]
+	[    141,     78,     34,     22,     -6,    - 8]
+	[  176+b,     78,     34,     22,    -16,    -14]	  //STOP
+	[      1,    101,     34,     22,    -26,    -11]
+	[     36,    101,     34,     22,     -6,    -16]
+	[   71+a,    101,     34,     22,    -16,    -14]	  //STOP
+	[    106,    101,     34,     22,    -26,    -16]
+	[    141,    101,     34,     22,     -6,    -11]
+	[  176+b,    101,     34,     22,    -16,    -14]	  //STOP
+}
+
+template tmpl_arrows_oneway(y) {
+	[      1,    1+y,     26,     13,    -12,     -7]
+	[     28,    1+y,     26,     13,    -12,     -7]
+	[     55,    1+y,     26,     13,    -12,     -7] 	  //STOP
+	[     82,    1+y,     26,     13,    -12,     -7]
+	[    109,    1+y,     26,     13,    -12,     -7]
+	[    136,    1+y,     26,     13,    -12,     -7]	  //STOP
+	[    163,    1+y,     26,     17,    -12,    -10]
+	[    190,    1+y,     26,     17,    -12,    -10]
+	[    217,    1+y,     26,     17,    -12,    -10] 	  //STOP
+	[    244,    1+y,     26,     17,    -12,    -10]
+	[    271,    1+y,     26,     17,    -12,    -10]
+	[    298,    1+y,     26,     17,    -12,    -10]  	  //STOP
+	[    325,    1+y,     26,     11,    -12,     -5]
+	[    352,    1+y,     26,     11,    -12,     -5]
+	[    379,    1+y,     26,     11,    -12,     -5] 	  //STOP
+	[    406,    1+y,     26,     11,    -12,     -5]
+	[    433,    1+y,     26,     11,    -12,     -5]
+	[    460,    1+y,     26,     11,    -12,     -5] 	  //STOP
+}
+
+template tmpl_arrows_sign_oneway(y,a,b) {
+	[      1,    1+y,     26,     13,    -12,     -7]
+	[     28,    1+y,     26,     13,    -12,     -7]
+	[   71+a,     55,     34,     22,    -16,    -14]     //STOP
+	[     82,    1+y,     26,     13,    -12,     -7]
+	[    109,    1+y,     26,     13,    -12,     -7]
+	[  176+b,     55,     34,     22,    -16,    -14]     //STOP
+	[    163,    1+y,     26,     17,    -12,    -10]
+	[    190,    1+y,     26,     17,    -12,    -10]
+	[   71+a,     78,     34,     22,    -16,    -14]     //STOP
+	[    244,    1+y,     26,     17,    -12,    -10]
+	[    271,    1+y,     26,     17,    -12,    -10]
+	[  176+b,     78,     34,     22,    -16,    -14]     //STOP
+	[    325,    1+y,     26,     11,    -12,     -5]
+	[    352,    1+y,     26,     11,    -12,     -5]
+	[   71+a,    101,     34,     22,    -16,    -14]     //STOP
+	[    406,    1+y,     26,     11,    -12,     -5]
+	[    433,    1+y,     26,     11,    -12,     -5]
+	[  176+b,    101,     34,     22,    -16,    -14]     //STOP
+}
+
+template tmpl_gui_icon(x, y) { [x, y, 20, 20, 0, 0]
+}
+template tmpl_gui_cursor(x, y) { [x, y, 32, 32, 0, 0]
+}
+template tmpl_gui_gfx() {
+    tmpl_gui_icon(  1, 700)
+    tmpl_gui_icon( 22, 700)
+    tmpl_gui_icon( 43, 700)
+    tmpl_gui_icon( 64, 700)
+    tmpl_gui_icon( 85, 700)
+    tmpl_gui_icon(127, 700)
+
+    tmpl_gui_cursor(  1, 721)
+    tmpl_gui_cursor( 34, 721)
+    tmpl_gui_cursor( 67, 721)
+    tmpl_gui_cursor(100, 721)
+    tmpl_gui_cursor(133, 721)
+    tmpl_gui_cursor(166, 721)
+}
+
+template tmpl_gui_ttd() {
+    tmpl_gui_icon(  1, 700)
+    tmpl_gui_icon( 22, 700)
+    tmpl_gui_icon( 43, 700)
+    tmpl_gui_icon( 64, 700)
+    tmpl_gui_icon( 85, 700)
+    tmpl_gui_icon(106, 700)
+
+    [    1,  754,   64,   36,  -18,  -8]
+	[   66,  754,   62,   36,  -16,  -8]
+	[  129,  754,   56,   36,    0,   0]
+    tmpl_gui_cursor(186, 754)
+    tmpl_gui_cursor(219, 754)
+    tmpl_gui_cursor(252, 754)
+}
+
+template tmpl_UGUI_icon(x, y) { [x, y, 33, 33, 0, 0] }
+template tmpl_UGUI_cursor(x, y) { [x, y, 30, 36, 0, 0] }
+template tmpl_gui_UGUI() {
+    tmpl_UGUI_icon(  1, 791)
+    tmpl_UGUI_icon( 35, 791)
+    tmpl_UGUI_icon( 69, 791)
+    tmpl_UGUI_icon(103, 791)
+    tmpl_UGUI_icon(137, 791)
+    tmpl_UGUI_icon(171, 791)
+
+    tmpl_UGUI_cursor(  1, 825)
+    tmpl_UGUI_cursor( 32, 825)
+    tmpl_UGUI_cursor( 63, 825)
+    tmpl_UGUI_cursor( 94, 825)
+    tmpl_UGUI_cursor(125, 825)
+    tmpl_UGUI_cursor(156, 825)
+}
+
+template ground_catenary(x, y) { [x, y, 64, 54, -31, -23] }
+template tmpl_catenary_combinations() {
+    ground_catenary(  1,  1)
+    ground_catenary( 66,  1)
+
+	ground_catenary(131,  1)
+    ground_catenary(196,  1)
+    ground_catenary(261,  1)
+    ground_catenary(326,  1)
+    ground_catenary(391,  1)
+}
+template tmpl_catenary_corners() {
+    ground_catenary(  1, 58)
+    ground_catenary( 66, 58)
+	ground_catenary(131, 58)
+    ground_catenary(196, 58)
+}
+template tmpl_catenary_slopes() {
+ 	[	 261,	56,	  64,	56,	  -31,	-25]
+	[	 326,	58,	  64,	46,	  -31,	-23]
+	[	 391,	58,	  64,	46,	  -31,	-23]
+	[	 456,	56,	  64,	56,	  -31,	-25]
+}
+template tmpl_catenary_dead_ends() {
+    ground_catenary(  1,113)
+    ground_catenary( 66,113)
+	ground_catenary(131,113)
+    ground_catenary(196,113)
+}
+template tmpl_catenary_tunnels() {
+    ground_catenary(261,113)
+    ground_catenary(326,113)
+    ground_catenary(391,113)
+	ground_catenary(456,113)
+}
+template tmpl_catenary_bridge() {
+    ground_catenary(  1,168)
+    ground_catenary( 66,168)
+	ground_catenary(131,168)
+	[    196,  168,	  64,	46,	  -31,	-23]
+	[	 261,  168,	  64,	46,	  -31,	-23]
+    ground_catenary(326,168)
+}
+template tmpl_catenary() {
+    tmpl_catenary_combinations()
+	tmpl_catenary_corners()
+	tmpl_catenary_slopes()
+	tmpl_catenary_dead_ends()
+	tmpl_catenary_tunnels()
+    tmpl_catenary_bridge()
+}
+//==================================================================================================================================
+//												ROAD CITY (SIDEWALK)
+//==================================================================================================================================
+replace road_city(1313, "gfx/R_URD0.png") {
+	tmpl_underlay_overlay(1)
+	}
+//==================================================================================================================================
+//												END
+//==================================================================================================================================
